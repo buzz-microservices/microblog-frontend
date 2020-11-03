@@ -4,14 +4,15 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
     skipDefaultCheckout true
   }
-  stages
+  stages('Node Stages')
   {
+
     stage('Build image'){
       agent {
         kubernetes{
           label 'kaniko'
         }
-      
+      }
       steps {
             checkout scm           
             container(name: 'kaniko-container', shell: '/busybox/sh') {
@@ -20,7 +21,6 @@ pipeline {
                  '''
             }
       } 
-    }
     }
   }
 }
