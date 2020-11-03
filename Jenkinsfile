@@ -6,7 +6,6 @@ pipeline {
   }
   stages('Node Stages')
   {
-
     stage('Build image'){
       agent {
         kubernetes{
