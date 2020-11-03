@@ -6,7 +6,22 @@ pipeline {
   }
   stages('Node Stages')
   {
-
+    stage('Node Install and Test') {
+      agent {
+        kubernetes {
+          label 'nodejs'
+       }
+      }
+      steps {
+            checkout scm           
+            container('nodejs-container') {
+              sh '''
+                 yarn install
+                 yarn test:unit
+                 '''
+            }
+      } 
+    }
     stage('Build image'){
       agent {
         kubernetes{
