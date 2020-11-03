@@ -30,7 +30,7 @@ pipeline {
       }
       steps {
             checkout scm           
-            container(name: 'kaniko', shell: '/busybox/sh') {
+            container(name: 'kaniko-container', shell: '/busybox/sh') {
               sh '''
                  /kaniko/executor --context `pwd` --destination gcr.io/microblog-from-kaniko:latest
                  '''
